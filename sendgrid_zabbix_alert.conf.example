@@ -1,0 +1,9 @@
+# Where the mail should be send from
+MAILFROMADDR="zabbix@example.com"
+
+# The name of the mailer
+MAILFROMNAME="Zabbix Alert Script"
+
+# Your sendgrid api key
+SENDGRID_API_KEY="abc123"
+
