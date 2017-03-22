@@ -16,7 +16,8 @@ MAILSUBJECT=$2
 MAILBODY=$3
 
 #curl --trace-ascii curltrace --request POST \
-curl --request POST \
+#curl --request POST \
+curl --write-out %{http_code} --trace-ascii curltrace --request POST \
   --url https://api.sendgrid.com/v3/mail/send \
   --header 'Authorization: Bearer '$SENDGRID_API_KEY'' \
   --header 'Content-Type: application/json' \
