@@ -1,3 +1,9 @@
+# configuration is sourced by the shell script
+# the following locations are checked.
+#
+#    $HOME/.sendgrid_zabbix_alert.conf                                                                                                                #    /etc/zabbix/sendgrid_zabbix_alert.conf
+
+# Mandatory variables:
 # Where the mail should be send from
 MAILFROMADDR="zabbix@example.com"
 
@@ -7,3 +13,28 @@ MAILFROMNAME="Zabbix Alert Script"
 # Your sendgrid api key
 SENDGRID_API_KEY="abc123"
 
+# optional configuration
+#SCRIPTTMPDIR=
+# by default /tmp/sendgrid_zabbix_alert_USERNAME
+
+# Optional debugging / testing settings
+
+# DEBUG writes debug information stuff to stdout and logged files in /tmp (separate files with unix time)
+# 
+# 1 - script output only
+# 2 - enviroment variables and 
+# 3 - curl"--trace-ascii" output is logged NOTE THAT THIS WILL EXPOSE YOUR API KEY
+
+# test without input parameters ( set them in config)
+#
+#TESTPARAMSINCONF=1
+#MAILTO="test@example.com"
+#MAILSUBJECT="test subject"
+#MAILBODY="let's test this"
+
+# 
+# EXIT_BEFORE_CURL=1
+
+# CURL_URL
+# the script defaults to "https://api.sendgrid.com/v3/mail/send"
+# shouldn't need to change this if you are using sendgrid
