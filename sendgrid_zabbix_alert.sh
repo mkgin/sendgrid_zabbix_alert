@@ -4,8 +4,8 @@
 # - send log  to zabbix server on not 202
 # - parse zabbix server conf for where to send alert
 # - debug levels or is it overkill?
-# - divide into debug, logging, and monitoring
-
+#   better to decide what output belongs to debug, logging, and monitoring
+#
 # Configuration files checked:
 #    $HOME/.sendgrid_zabbix_alert.conf
 #    /etc/zabbix/sendgrid_zabbix_alert.conf
@@ -63,9 +63,13 @@ else
     if [ $DEBUG ]; then echo "DEBUG: Using argument parameters for MAILTO, MAILSUBJECT and MAILBODY" ; fi 
     MAILTO=$1
     MAILSUBJECT=$2
-# Strip Carriage returns and (0x0d) use \n instead
+
+# To keep JSON happy, strip the following:
+# - Carriage returns and (0x0d) use \n instead
+# - " and use \\\" 
+# 
 # linefeeds 0x0a, commas and semicolons are not handled yet ( but may need handling)
-    MAILBODY=$( echo "$3" |sed  's/\x0d/\\n/g' | tr -d "\n" )
+    MAILBODY=$( echo "$3" |sed  's/\x0d/\\n/g' | sed 's/\"/\\\"/g' | tr -d "\n" )
 fi 
 
 # your API keys will show up in in the debug info if "--curl-trace" is used 
